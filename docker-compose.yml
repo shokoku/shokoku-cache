@@ -1,0 +1,7 @@
+services:
+  shokoku-cache-redis:
+    image: redis:8.2.1
+    container_name: shokoku-cache-redis
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
