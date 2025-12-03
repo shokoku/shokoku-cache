@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestControllerAdvice
+@RestController
 @RequiredArgsConstructor
 public class ItemController {
   private final List<ItemCacheService> itemCacheServices;
@@ -33,7 +33,7 @@ public class ItemController {
     return resolveCacheHandler(cacheStrategy).readAll(page, pageSize);
   }
 
-  @GetMapping("/cache-strategy/{cacheStrategy}/items")
+  @GetMapping("/cache-strategy/{cacheStrategy}/items/infinite-scroll")
   public ItemPageResponse readAllInfiniteScroll(
           @PathVariable CacheStrategy cacheStrategy,
           @RequestParam(required = false) Long lastItemId,
