@@ -19,7 +19,7 @@ public class BloomFilterRedisHandler {
    */
   public void init(BloomFilter bloomFilter) {
     String key = genKey(bloomFilter);
-    for (long offset = 0; offset < bloomFilter.getBitSize(); offset+= 8L * 1024 * 1024 * 8 /* 8MB */) {
+    for (long offset = 0; offset < bloomFilter.getBitSize(); offset += 8L * 1024 * 1024 * 8 /* 8MB */) {
       redisTemplate.opsForValue().setBit(key, offset, false);
     }
   }
