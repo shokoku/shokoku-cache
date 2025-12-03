@@ -95,4 +95,26 @@ class BloomFilterRedisHandlerTest extends RedisTestContainerSupport {
     System.out.println("millis = " + millis);
   }
 
+  @Test
+  void mightContain_whenBloomFilterAddedTooManyData() {
+    BloomFilter bloomFilter = BloomFilter.create("testId", 1000, 0.01);
+
+    List<String> values = IntStream.range(0, 2000).mapToObj(idx -> "value" + idx).toList();
+    for (String value : values) {
+      bloomFilterRedisHandler.add(bloomFilter, value);
+    }
+
+    for (String value : values) {
+      assertThat(bloomFilterRedisHandler.mightContain(bloomFilter, value)).isTrue();
+    }
+
+    for(int i = 0; i < 10000; i++) {
+      String value = "notAddedValue" + i;
+      boolean result = bloomFilterRedisHandler.mightContain(bloomFilter, value);
+      if (result) {
+        System.out.println("value = " + value);
+      }
+    }
+  }
+
 }
