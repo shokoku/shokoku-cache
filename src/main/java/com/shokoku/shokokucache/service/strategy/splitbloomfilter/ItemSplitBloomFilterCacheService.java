@@ -61,6 +61,6 @@ public class ItemSplitBloomFilterCacheService implements ItemCacheService {
 
   @Override
   public boolean supports(CacheStrategy cacheStrategy) {
-    return CacheStrategy.BLOOM_FILTER == cacheStrategy;
+    return CacheStrategy.SPLIT_BLOOM_FILTER == cacheStrategy;
   }
 }
