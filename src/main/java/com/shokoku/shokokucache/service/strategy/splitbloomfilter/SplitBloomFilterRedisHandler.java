@@ -32,7 +32,7 @@ public class SplitBloomFilterRedisHandler {
         long splitIndex = splitBloomFilter.findSplitIndex(hashedIndex);
         conn.getBit(
                 genKey(splitBloomFilter, splitIndex),
-                hashedIndex & SplitBloomFilter.BIT_SPLIT_UNIT
+                hashedIndex % SplitBloomFilter.BIT_SPLIT_UNIT
         );
       }
       return null;
