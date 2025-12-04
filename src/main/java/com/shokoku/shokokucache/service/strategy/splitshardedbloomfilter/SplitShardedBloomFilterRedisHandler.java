@@ -29,7 +29,7 @@ public class SplitShardedBloomFilterRedisHandler {
     return splitBloomFilterRedisHandler.mightContain(shard, value);
   }
 
-  public void remove(SplitShardedBloomFilter splitShardedBloomFilter, String value) {
+  public void delete(SplitShardedBloomFilter splitShardedBloomFilter) {
     List<SplitBloomFilter> shards = splitShardedBloomFilter.getShards();
     for (SplitBloomFilter shard : shards) {
       splitBloomFilterRedisHandler.delete(shard);
